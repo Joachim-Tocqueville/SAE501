@@ -3,18 +3,18 @@ import { PageIntro } from "@/components/ui/page-intro";
 
 const schedule = [
   { time: "09:30", duration: "30 min", title: "Accueil des visiteurs", detail: "Hall principal · Bâtiment A", type: "Accueil" },
-  { time: "10:00", duration: "30 min", title: "Présentation du BUT MMI", detail: "Amphithéâtre B · Bâtiment A", type: "Présentation" },
+  { time: "10:00", duration: "30 min", title: "Présentation du BUT MMI", detail: "Amphithéâtre Bossuet · Bâtiment A", type: "Présentation" },
   { time: "10:45", duration: "45 min", title: "Atelier motion design", detail: "Salle 204 · 2e étage", type: "Atelier" },
   { time: "11:45", duration: "30 min", title: "Visite du studio audiovisuel", detail: "Studio · 2e étage", type: "Visite" },
-  { time: "14:00", duration: "30 min", title: "Démonstration réalité virtuelle", detail: "Salle 110 · 1er étage", type: "Démo" },
-  { time: "15:00", duration: "45 min", title: "Rencontre avec les étudiants", detail: "Espace projets · Bâtiment B", type: "Rencontre" },
+  { time: "14:00", duration: "30 min", title: "Démonstration réalité virtuelle", detail: "Salle 212 · 2e étage", type: "Démo" },
+  { time: "15:00", duration: "45 min", title: "Rencontre avec les étudiants", detail: "Salle 209 · 2e étage", type: "Rencontre" },
 ];
 
 export default function ProgrammePage() {
   return (
     <>
       <PageIntro
-        eyebrow="Samedi · IUT de Meaux"
+        eyebrow="Samedi 30 janvier 2027 · 9h30 – 17h · Campus de Meaux"
         title="Le programme de la journée"
         description="Composez votre visite parmi les présentations, ateliers et rencontres proposés tout au long de la journée."
         action={{ label: "Créer mon itinéraire", href: "/itineraire" }}

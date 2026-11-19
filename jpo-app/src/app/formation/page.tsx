@@ -5,23 +5,34 @@ const skills = [
     number: "01",
     title: "Développer",
     description: "Créer des sites, applications et expériences numériques accessibles.",
+    image: "/images/developper-code.jpg",
   },
   {
     number: "02",
     title: "Concevoir",
     description: "Imaginer des interfaces, des identités visuelles et des contenus multimédias.",
+    image: "/images/concevoir-maquette.jpg",
   },
   {
     number: "03",
     title: "Communiquer",
     description: "Construire une stratégie de communication et raconter une histoire.",
+    image: "/images/communiquer-montage.jpg",
   },
+];
+
+// Photos provisoires (public/images) : remplacez-les par des photos du département
+const gallery = [
+  { src: "/images/etudiants-projet.jpg", caption: "Projets en équipe", detail: "Les étudiants travaillent en groupe dès la 1re année." },
+  { src: "/images/design-couleurs.jpg", caption: "Design & identité visuelle", detail: "Couleurs, typographie, maquettes." },
+  { src: "/images/salle-311-3d.jpg", caption: "La salle 311", detail: "Une salle informatique type, vue dans notre maquette 3D." },
+  { src: "/images/etudiants-groupe.jpg", caption: "Entraide entre promos", detail: "Une ambiance de travail conviviale." },
 ];
 
 const semesters = [
   ["1re année", "Découvrir les métiers et acquérir les fondamentaux"],
   ["2e année", "Choisir un parcours et approfondir ses compétences"],
-  ["3e année", "Réaliser des projets professionnels et se spécialiser"],
+  ["3e année", "En alternance ou en formation initiale, parcours Développement web et dispositifs interactifs"],
 ];
 
 export default function FormationPage() {
@@ -43,6 +54,9 @@ export default function FormationPage() {
         <div className="info-card-grid">
           {skills.map((skill) => (
             <article className="card info-card" key={skill.number}>
+              <div className="info-card__media">
+                <img src={skill.image} alt="" loading="lazy" />
+              </div>
               <span className="info-card__number">{skill.number}</span>
               <h3>{skill.title}</h3>
               <p>{skill.description}</p>
@@ -62,6 +76,25 @@ export default function FormationPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+      <section className="container page-section">
+        <header className="section-heading">
+          <div>
+            <span className="eyebrow">En images</span>
+            <h2>La vie au département</h2>
+          </div>
+        </header>
+        <div className="gallery">
+          {gallery.map((photo) => (
+            <figure className="gallery-item" key={photo.src}>
+              <img src={photo.src} alt={photo.caption} loading="lazy" />
+              <figcaption>
+                <strong>{photo.caption}</strong>
+                <span>{photo.detail}</span>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </section>
       <section className="container page-section page-section--last">

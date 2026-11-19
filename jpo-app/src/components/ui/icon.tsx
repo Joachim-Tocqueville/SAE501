@@ -8,9 +8,31 @@ type IconName =
   | "map"
   | "play"
   | "menu"
-  | "clock";
+  | "clock"
+  | "info"
+  | "expand"
+  | "arrowLeft"
+  | "plus"
+  | "chevron"
+  | "cube";
 
 const paths: Record<IconName, ReactNode> = {
+  info: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 16v-5M12 8h.01" />
+    </>
+  ),
+  expand: <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />,
+  arrowLeft: <path d="M19 12H5m6-6-6 6 6 6" />,
+  plus: <path d="M12 5v14M5 12h14" />,
+  chevron: <path d="m9 6 6 6-6 6" />,
+  cube: (
+    <>
+      <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
+      <path d="m4 7.5 8 4.5 8-4.5M12 12v9" />
+    </>
+  ),
   calendar: (
     <>
       <rect x="3" y="5" width="18" height="16" rx="2" />

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+// Contenu du footer repris de la maquette Figma (D01 · Accueil)
 const footerLinks = [
   {
     title: "Accès rapide",
@@ -7,16 +8,16 @@ const footerLinks = [
       ["Programme", "/programme"],
       ["Visite 360°", "/visite-360"],
       ["S’inscrire", "/inscription"],
-      ["Préparer ma visite", "/itineraire"],
+      ["Donner mon avis", "/questionnaire"],
     ],
   },
   {
     title: "Informations",
     links: [
-      ["Plan du campus", "/itineraire"],
-      ["Infos pratiques", "/itineraire"],
-      ["Formation", "/formation"],
-      ["Questionnaire", "/questionnaire"],
+      ["Mentions légales", "/informations/mentions-legales"],
+      ["Politique de confidentialité (RGPD)", "/informations/confidentialite"],
+      ["Gestion des cookies", "/informations/cookies"],
+      ["Accessibilité", "/informations/accessibilite"],
     ],
   },
 ];
@@ -26,27 +27,29 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="footer-main">
         <div className="footer-identity">
-          <strong>IUT · Département MMI</strong>
+          <strong>JPO · Département MMI</strong>
           <p>
-            IUT de Meaux · Université Gustave Eiffel
+            IUT de Meaux – Université Gustave Eiffel
             <br />
             17 rue Jablinot, 77100 Meaux
           </p>
         </div>
         {footerLinks.map((group) => (
-          <div className="footer-links" key={group.title}>
+          <nav className="footer-links" key={group.title} aria-label={group.title}>
             <h2>{group.title}</h2>
             {group.links.map(([label, href]) => (
               <Link href={href} key={label}>
                 {label}
               </Link>
             ))}
-          </div>
+          </nav>
         ))}
       </div>
       <div className="footer-bottom">
-        <span>© 2025 IUT · Université Gustave Eiffel · Projet SAE S2 · BUT MMI</span>
-        <Link href="/">Retour en haut ↑</Link>
+        <span>© 2027 IUT – Université Gustave Eiffel · Projet SAÉ 501 – BUT MMI</span>
+        <span className="footer-credits">
+          Réalisé par Maxime Monenrat, Rayane Adjaoud, Maïlys Borel et Joachim Toqueville
+        </span>
       </div>
     </footer>
   );
