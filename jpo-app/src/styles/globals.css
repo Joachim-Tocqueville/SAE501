@@ -1,12 +1,12 @@
 :root {
-  --color-ink: #171727;
-  --color-muted: #6b6b78;
-  --color-purple: #28216f;
-  --color-purple-dark: #211b61;
-  --color-mint: #55b6a9;
-  --color-paper: #f7f6f3;
-  --color-line: #e9e8e5;
-  --content-width: 1180px;
+  --color-ink: #0c1014;
+  --color-muted: #6b6b76;
+  --color-purple: #2f2a85;
+  --color-purple-dark: #1e1a5c;
+  --color-mint: #00a19a;
+  --color-paper: #f7f6f2;
+  --color-line: #e9e7e0;
+  --content-width: 1320px;
 }
 
 * {
@@ -21,8 +21,8 @@ body {
   margin: 0;
   background: var(--color-paper);
   color: var(--color-ink);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-family: var(--font-dm-sans), Arial, Helvetica, sans-serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -46,10 +46,15 @@ a {
   padding: 0 17px;
   border: 1px solid transparent;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
-  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
   white-space: nowrap;
 }
 
@@ -60,7 +65,7 @@ a {
 .button--small {
   min-height: 32px;
   padding: 0 13px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .button--primary {
@@ -74,22 +79,26 @@ a {
 }
 
 .button--outline {
-  border-color: #5146aa;
+  border-color: #4a44b0;
   color: var(--color-purple);
   background: transparent;
 }
 
+/* Au survol, le bouton contour prend les couleurs du bouton plein (S'inscrire) */
 .button--outline:hover {
-  background: #f3f1ff;
+  border-color: var(--color-purple);
+  color: #fff;
+  background: var(--color-purple);
+  box-shadow: 0 5px 14px #211b6125;
 }
 
 .button--mint {
   color: #fff;
-  background: #46aa9e;
+  background: #00a19a;
 }
 
 .button--mint:hover {
-  background: #368f84;
+  background: #0d6f65;
 }
 
 .button--light {
@@ -100,9 +109,9 @@ a {
 .eyebrow {
   display: block;
   margin-bottom: 8px;
-  color: #328f86;
-  font-size: 9px;
-  font-weight: 800;
+  color: #0d6f65;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -118,7 +127,7 @@ a {
 
 .section-heading h2 {
   margin: 0;
-  font-size: clamp(22px, 2.4vw, 30px);
+  font-size: clamp(24px, 2.2vw, 28px);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.2;
@@ -129,6 +138,17 @@ a {
   border-radius: 15px;
   background: #fff;
   box-shadow: 0 4px 14px #24211a08;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Animation commune au survol de toutes les cartes du site */
+.card:hover {
+  border-color: #e4e1f5;
+  box-shadow: 0 16px 36px #28216f1f;
+  transform: translateY(-6px);
 }
 
 .icon-badge {
@@ -154,8 +174,8 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: #5146a7;
-  font-size: 10px;
+  color: #4a44b0;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -170,7 +190,7 @@ a {
   }
 
   .section-heading h2 {
-    font-size: 23px;
+    font-size: 24px;
   }
 }
 
@@ -183,4 +203,29 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* ===== Apparition au défilement (gérée par components/ui/scroll-reveal.tsx) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Texte réservé aux lecteurs d'écran (invisible à l'écran) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }

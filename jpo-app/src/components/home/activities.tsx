@@ -6,7 +6,7 @@ const activities = [
     duration: "30 min",
     tag: "En direct",
     title: "Présentation du BUT MMI & parcours",
-    room: "Amphi B · Bâtiment A",
+    room: "Amphi Bossuet · Bâtiment A",
     status: "live",
   },
   {
@@ -20,9 +20,9 @@ const activities = [
   {
     time: "11:30",
     duration: "30 min",
-    tag: "À venir",
+    tag: "Démo VR",
     title: "Démo réalité virtuelle",
-    room: "Salle 110 · 1er étage",
+    room: "Salle 212 · 2e étage",
     status: "upcoming",
   },
 ] as const;

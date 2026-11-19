@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@/components/ui/icon";
-
 const navigation = [
   { label: "Accueil", href: "/" },
   { label: "La formation", href: "/formation" },
@@ -17,12 +16,14 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <Link className="brand" href="/" aria-label="IUT de Meaux, accueil">
-        <span className="brand-mark">
-          <span className="brand-university">UNIVERSITÉ</span>
-          <span className="brand-iut">IUT</span>
+      <Link className="brand" href="/" aria-label="MMI, Métiers du Multimédia et de l’Internet : accueil">
+        {/* Logo exporté depuis Figma (charte graphique, proposition B) */}
+        <img className="brand-logo" src="/logos/logo-mmi-icone.svg" alt="" />
+        <span className="brand-name">
+          Métiers du Multimédia
+          <br />
+          et de l’Internet
         </span>
-        <span className="brand-name">GUSTAVE EIFFEL</span>
       </Link>
 
       <nav className="main-nav" aria-label="Navigation principale">

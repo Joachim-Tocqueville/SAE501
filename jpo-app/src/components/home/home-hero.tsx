@@ -1,3 +1,4 @@
+import { CountUp } from "@/components/ui/count-up";
 import { Icon } from "@/components/ui/icon";
 
 export function HomeHero() {
@@ -6,12 +7,13 @@ export function HomeHero() {
       <div className="hero-content">
         <span className="event-pill">
           <span className="event-dot" />
-          JPO BUT MMI · Samedi 11 mars
+          JPO BUT MMI · Samedi 30 janvier 2027
         </span>
         <h1>Découvrez le BUT MMI à l’IUT de Meaux</h1>
         <p className="hero-description">
-          Programme en code, design et audiovisuel, visite 360° des locaux,
-          itinéraire personnalisé : préparez votre venue au département MMI.
+          Programme en direct, visite virtuelle 360° des locaux, itinéraire
+          personnalisé : préparez votre venue ou visitez le département depuis
+          chez vous.
         </p>
         <div className="hero-actions">
           <a className="button button--mint" href="/inscription">
@@ -25,33 +27,31 @@ export function HomeHero() {
         </div>
         <div className="hero-stats" aria-label="Chiffres clés de la formation">
           <div>
-            <strong>3 ans</strong>
+            <strong><CountUp value={3} suffix=" ans" duration={900} /></strong>
             <span>Bac+3 · BUT</span>
           </div>
           <div>
-            <strong>12</strong>
-            <span>métiers à visiter</span>
+            <strong><CountUp value={12} /></strong>
+            <span>salles à visiter</span>
           </div>
           <div>
-            <strong>14</strong>
+            <strong><CountUp value={14} /></strong>
             <span>activités aujourd’hui</span>
           </div>
         </div>
       </div>
 
-      <a className="hero-visual" href="/visite-360" aria-label="Découvrir le studio audiovisuel">
-        <div className="visual-orbit orbit-one" />
-        <div className="visual-orbit orbit-two" />
-        <div className="studio-label">
-          <span className="studio-icon">
-            <Icon name="play" size={14} />
-          </span>
-          <span>
-            <strong>Studio audiovisuel</strong>
-            <small>Étage 2 · visite 360° · salle 220</small>
-          </span>
-        </div>
-      </a>
+      {/* Vidéo provisoire, en attendant le contenu définitif */}
+      <div className="hero-visual hero-visual--video">
+        <iframe
+          className="hero-video"
+          src="https://www.youtube-nocookie.com/embed/OU2niH-FJI4?autoplay=1&mute=1"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        />
+      </div>
     </section>
   );
 }
