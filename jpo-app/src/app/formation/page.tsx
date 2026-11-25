@@ -48,7 +48,7 @@ const gallery: GalleryItem[] = [
 const semesters = [
   ["1re année", "Découvrir les métiers et acquérir les fondamentaux"],
   ["2e année", "Choisir un parcours et approfondir ses compétences"],
-  ["3e année", "En alternance ou en formation initiale, parcours Développement web et dispositifs interactifs"],
+  ["3e année", "En alternance ou en formation initiale"],
 ];
 
 export default function FormationPage() {
