@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Icon } from "@/components/ui/icon";
 import { PageIntro } from "@/components/ui/page-intro";
 
 const skills = [
@@ -21,12 +23,26 @@ const skills = [
   },
 ];
 
-// Photos provisoires (public/images) : remplacez-les par des photos du département
-const gallery = [
-  { src: "/images/etudiants-projet.jpg", caption: "Projets en équipe", detail: "Les étudiants travaillent en groupe dès la 1re année." },
-  { src: "/images/design-couleurs.jpg", caption: "Design & identité visuelle", detail: "Couleurs, typographie, maquettes." },
-  { src: "/images/salle-311-3d.jpg", caption: "La salle 311", detail: "Une salle informatique type, vue dans notre maquette 3D." },
-  { src: "/images/etudiants-groupe.jpg", caption: "Entraide entre promos", detail: "Une ambiance de travail conviviale." },
+/**
+ * Vue 360° Google Maps intégrée (lecteur officiel : le crédit de l'auteur reste affiché).
+ * heading = direction de départ en degrés (valeur « ya » du lien Google),
+ * pitch = inclinaison (0 = horizon, négatif = vers le bas, positif = vers le haut).
+ */
+const sphere = (photoId: string, heading: number, pitch = 0) =>
+  `https://www.google.com/maps/embed?pb=!4v1764000000000!6m8!1m7!1s${photoId}!2m2!1d48.9546!2d2.8776!3f${heading}!4f${pitch}!5f0.78`;
+
+// Galerie sans photos d'étudiants : vues 360° de l'IUT (Google Maps) + des cases d'information (brochure BUT MMI)
+type GalleryItem =
+  | { kind: "photo"; src: string; caption: string; detail: string; credit?: string; wide?: boolean }
+  | { kind: "sphere"; src: string; caption: string; wide?: boolean }
+  | { kind: "info"; icon: "globe" | "cube"; title: string; text: string; tone: "mint" | "purple"; href?: string; cta?: string };
+
+const gallery: GalleryItem[] = [
+  { kind: "sphere", src: sphere("CAoSF0NJSE0wb2dLRUlDQWdJQ3h6TXZ6OVFF", 200), caption: "Le hall d’accueil", wide: true },
+  { kind: "info", icon: "globe", tone: "mint", title: "Salle de réalité virtuelle et augmentée", text: "Un équipement propre au site de Meaux, pour tester et créer des expériences immersives." },
+  { kind: "sphere", src: sphere("CAoSFkNJSE0wb2dLRUlDQWdJRFJtOFRxQ2c", 180), caption: "Le studio de tournage" },
+  { kind: "sphere", src: sphere("CAoSF0NJSE0wb2dLRUlDQWdJQ3h6S3V3bWdF", 160), caption: "La salle gaming" },
+  { kind: "info", icon: "cube", tone: "purple", title: "Visitez l’IUT en 3D", text: "Le hall, les amphis et la salle 311 dans notre maquette.", href: "/visite-360", cta: "Lancer la visite" },
 ];
 
 const semesters = [
@@ -82,19 +98,50 @@ export default function FormationPage() {
         <header className="section-heading">
           <div>
             <span className="eyebrow">En images</span>
-            <h2>La vie au département</h2>
+            <h2>Le campus en images</h2>
           </div>
         </header>
         <div className="gallery">
-          {gallery.map((photo) => (
-            <figure className="gallery-item" key={photo.src}>
-              <img src={photo.src} alt={photo.caption} loading="lazy" />
-              <figcaption>
-                <strong>{photo.caption}</strong>
-                <span>{photo.detail}</span>
-              </figcaption>
-            </figure>
-          ))}
+          {gallery.map((item) =>
+            item.kind === "sphere" ? (
+              <figure className={`gallery-item gallery-item--sphere${item.wide ? " gallery-item--wide" : ""}`} key={item.src}>
+                <iframe
+                  src={item.src}
+                  title={`Vue 360° : ${item.caption}`}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <figcaption>
+                  <span className="gallery-sphere__badge">360°</span>
+                  <strong>{item.caption}</strong>
+                </figcaption>
+              </figure>
+            ) : item.kind === "photo" ? (
+              <figure className={`gallery-item${item.wide ? " gallery-item--wide" : ""}`} key={item.src}>
+                <img src={item.src} alt={item.caption} loading="lazy" />
+                <figcaption>
+                  <strong>{item.caption}</strong>
+                  <span>{item.detail}</span>
+                  {item.credit && <small>{item.credit}</small>}
+                </figcaption>
+              </figure>
+            ) : (
+              <div className={`gallery-item gallery-tile gallery-tile--${item.tone}`} key={item.title}>
+                <span className="gallery-tile__icon">
+                  <Icon name={item.icon} size={22} />
+                </span>
+                <strong>{item.title}</strong>
+                <p>{item.text}</p>
+                {item.href && (
+                  <Link className="gallery-tile__link" href={item.href}>
+                    {item.cta}
+                    <Icon name="arrow" size={14} />
+                  </Link>
+                )}
+              </div>
+            ),
+          )}
         </div>
       </section>
       <section className="container page-section page-section--last">
