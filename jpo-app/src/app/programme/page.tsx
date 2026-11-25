@@ -10,6 +10,7 @@ const schedule = [
   { time: "15:00", duration: "45 min", title: "Rencontre avec les étudiants", detail: "Salle 209 · 2e étage", type: "Rencontre" },
 ];
 
+
 export default function ProgrammePage() {
   return (
     <>
