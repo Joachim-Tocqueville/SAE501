@@ -45,7 +45,8 @@ export function CountUp({ value, suffix = "", duration = 1200 }: CountUpProps) {
 
   return (
     <span ref={ref}>
-      {display}
+      {/* espace insécable normale : l'espace fine par défaut est presque invisible en DM Sans */}
+      {display.toLocaleString("fr-FR").replace(/\u202f/g, "\u00a0")}
       {suffix}
     </span>
   );

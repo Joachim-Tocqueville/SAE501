@@ -2,8 +2,25 @@
 
 import { useState, type FormEvent } from "react";
 
+// Centres d'intérêt proposés aux futurs étudiants (pas aux parents / accompagnateurs)
+const interests = [
+  { value: "3d", label: "J’aime la 3D et le jeu vidéo" },
+  { value: "code", label: "J’aime le code et le développement web" },
+  { value: "graphisme", label: "Le graphisme et le design" },
+  { value: "audiovisuel", label: "La vidéo et l’audiovisuel" },
+  { value: "communication", label: "La communication et les réseaux sociaux" },
+  { value: "decouverte", label: "Je découvre, je ne sais pas encore" },
+  { value: "autre", label: "Autre" },
+];
+
 export function RegistrationForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [profile, setProfile] = useState("");
+  const [interest, setInterest] = useState("");
+
+  // La question sur les centres d'intérêt n'apparaît qu'une fois un profil choisi,
+  // et pas pour les parents / accompagnateurs
+  const showInterest = profile !== "" && profile !== "parent";
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -15,7 +32,7 @@ export function RegistrationForm() {
       <div className="form-card__heading">
         <span className="eyebrow">Journée portes ouvertes</span>
         <h2>Préparez votre venue</h2>
-        <p>Quelques informations pour organiser votre visite.</p>
+        <p>Quelques informations à remplir pour organiser au mieux votre visite.</p>
       </div>
       <div className="form-grid">
         <label className="form-field">
@@ -32,32 +49,49 @@ export function RegistrationForm() {
         </label>
         <label className="form-field">
           <span>Vous êtes</span>
-          <select name="profile" defaultValue="" required>
+          <select name="profile" value={profile} onChange={(event) => setProfile(event.target.value)} required>
             <option value="" disabled>
               Sélectionnez votre profil
             </option>
-            <option>Lycéen(ne)</option>
-            <option>Étudiant(e)</option>
-            <option>Parent ou accompagnateur</option>
-            <option>Autre</option>
+            <option value="lyceen">Lycéen(ne)</option>
+            <option value="etudiant">Étudiant(e)</option>
+            <option value="parent">Parent ou accompagnateur</option>
+            <option value="autre">Autre</option>
           </select>
         </label>
-        <label className="form-field">
-          <span>Nombre de personnes</span>
-          <select name="attendees" defaultValue="1">
-            <option value="1">1 personne</option>
-            <option value="2">2 personnes</option>
-            <option value="3">3 personnes</option>
-            <option value="4">4 personnes ou plus</option>
-          </select>
-        </label>
-        <label className="form-field">
-          <span>Créneau souhaité</span>
-          <select name="time" defaultValue="matin">
-            <option value="matin">Matin · à partir de 10 h</option>
-            <option value="apres-midi">Après-midi · à partir de 14 h</option>
-          </select>
-        </label>
+        {showInterest && (
+          <div className="form-field form-field--full form-field--reveal">
+            <label className="form-field">
+              <span>Qu’est-ce qui vous intéresse dans la formation ?</span>
+              <select
+                name="interest"
+                value={interest}
+                onChange={(event) => setInterest(event.target.value)}
+                required
+              >
+                <option value="" disabled>
+                  Choisissez ce qui vous attire
+                </option>
+                {interests.map((item) => (
+                  <option value={item.value} key={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {interest === "autre" && (
+              <label className="form-field form-field--reveal">
+                <span>Précisez</span>
+                <input
+                  name="interestOther"
+                  placeholder="Par exemple : la photo, le motion design…"
+                  maxLength={150}
+                  required
+                />
+              </label>
+            )}
+          </div>
+        )}
       </div>
       <label className="checkbox-field">
         <input type="checkbox" name="updates" />

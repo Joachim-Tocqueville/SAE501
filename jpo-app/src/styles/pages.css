@@ -47,30 +47,6 @@
   margin-bottom: 20px;
 }
 
-.info-card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.info-card {
-  min-height: 165px;
-  padding: 22px;
-}
-
-.info-card__number {
-  display: inline-flex;
-  color: #4a44b0;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.info-card h3 {
-  margin: 16px 0 8px;
-  font-size: 22px;
-}
-
-.info-card p,
 .closing-card p {
   margin: 0;
   color: var(--color-muted);
@@ -667,13 +643,8 @@
     padding-bottom: 44px;
   }
 
-  .info-card-grid,
   .year-list {
     grid-template-columns: 1fr;
-  }
-
-  .info-card {
-    min-height: 0;
   }
 
   .year-item {
@@ -716,14 +687,9 @@
 
 /* ===== Animations au survol (la montée des .card est dans globals.css) ===== */
 
-/* Formation : numéro de compétence */
-.info-card__number,
+/* Programme : l'horaire glisse au survol (voir plus bas) */
 .schedule-time {
   transition: transform 0.3s ease;
-}
-
-.info-card:hover .info-card__number {
-  transform: translateX(4px);
 }
 
 /* Formation : années du parcours (BUT 1, 2, 3) */
@@ -748,30 +714,6 @@
 /* Infos pratiques : les étapes de l'itinéraire bougent moins (liste serrée) */
 .planner-stop:hover {
   transform: translateY(-3px);
-}
-
-/* ===== Formation : photo en haut des cartes de compétences ===== */
-.info-card {
-  overflow: hidden;
-}
-
-.info-card__media {
-  margin: -22px -22px 18px;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #1e1a5c;
-}
-
-.info-card__media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.info-card:hover .info-card__media img {
-  transform: scale(1.06);
 }
 
 /* ===== Formation : galerie « Le campus en images » (photos + cases d’information) ===== */
@@ -1542,4 +1484,1227 @@
   font-weight: 600;
   transform: translate(-50%, -50%);
   animation: tour-breathe 1.2s ease-in-out infinite alternate;
+}
+
+/* Inscription : question « Qu'est-ce qui vous intéresse ? » (affichée selon le profil) */
+.form-field--full {
+  grid-column: 1 / -1;
+  gap: 13px;
+}
+
+.form-field--reveal {
+  animation: form-reveal 0.3s ease both;
+}
+
+@keyframes form-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Inscription : le bloc d'infos et le formulaire ont toujours la même hauteur */
+.registration-layout {
+  align-items: stretch;
+}
+
+.registration-layout .form-card {
+  align-content: start;
+}
+
+/* ===== Formation : les 5 compétences ===== */
+.competence-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.competence {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid var(--color-line);
+  border-radius: 15px;
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.competence:hover {
+  box-shadow: 0 12px 28px #28216f17;
+  transform: translateY(-4px);
+}
+
+.competence__number {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-purple);
+  background: #eae9f5;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.competence strong {
+  margin-top: 6px;
+  font-size: 18px;
+}
+
+.competence p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.competence--highlight {
+  border-color: var(--color-purple);
+  color: #fff;
+  background: var(--color-purple);
+}
+
+.competence--highlight p {
+  color: #e0deef;
+}
+
+.competence--highlight .competence__number {
+  color: var(--color-purple);
+  background: #fff;
+}
+
+.competence__badge {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 3px 9px;
+  border-radius: 999px;
+  color: #1e1a5c;
+  background: #fbda26;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ===== Formation : et après ? ===== */
+.outlook-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.outlook-card {
+  padding: 26px;
+}
+
+.outlook-card h3 {
+  margin: 16px 0 12px;
+  font-size: 20px;
+}
+
+.outlook-card ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.outlook-card li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.outlook-card li::before {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-mint);
+  content: "";
+}
+
+.outlook-card p {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+  .competence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .competence {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 12px;
+    align-items: start;
+  }
+
+  .competence p,
+  .competence__badge {
+    grid-column: 2;
+  }
+
+  .competence strong {
+    margin-top: 2px;
+  }
+}
+
+@media (max-width: 700px) {
+  .outlook-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Formation : carrousel « Année par année » (year-carousel.tsx) ===== */
+.year-carousel {
+  display: grid;
+  gap: 24px;
+}
+
+/* Frise des années */
+.year-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.year-steps__line {
+  position: absolute;
+  top: 20px;
+  right: 16.66%;
+  left: 16.66%;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-line);
+}
+
+.year-steps__line > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-purple), var(--color-mint));
+  transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.year-step {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  color: var(--color-muted);
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.year-step__dot {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 3px solid var(--color-line);
+  border-radius: 50%;
+  color: var(--color-muted);
+  background: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.year-step__label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.year-step:hover .year-step__dot {
+  transform: scale(1.08);
+}
+
+.year-step.is-done .year-step__dot {
+  border-color: var(--color-purple);
+  color: #fff;
+  background: var(--color-purple);
+}
+
+.year-step.is-active .year-step__dot {
+  border-color: #e0f4f3;
+  color: #fff;
+  background: var(--color-mint);
+  box-shadow: 0 0 0 6px #00a19a26;
+  transform: scale(1.12);
+}
+
+.year-step.is-active .year-step__label {
+  color: var(--color-ink);
+}
+
+.year-step:focus-visible {
+  outline: none;
+}
+
+.year-step:focus-visible .year-step__dot {
+  outline: 3px solid var(--color-mint);
+  outline-offset: 3px;
+}
+
+/* Diapositives */
+.year-viewport {
+  overflow: hidden;
+  border-radius: 24px;
+  touch-action: pan-y;
+}
+
+.year-track {
+  display: flex;
+  transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.year-slide {
+  display: grid;
+  flex: 0 0 100%;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  padding: 36px 40px;
+  border: 1px solid var(--color-line);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 100% 0%, #e0f4f3 0%, #e0f4f300 45%),
+    #fff;
+  user-select: none;
+}
+
+.year-slide__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.year-slide__big {
+  color: var(--color-purple);
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.year-slide__big small {
+  margin-left: 2px;
+  font-size: 24px;
+  vertical-align: super;
+}
+
+.year-slide h3 {
+  margin: 16px 0 10px;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.year-slide__intro > p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.year-slide__program {
+  padding: 24px;
+  border-radius: 18px;
+  background: var(--color-paper);
+}
+
+.year-slide__program h4 {
+  margin: 0 0 14px;
+  color: var(--color-ink);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Les matières apparaissent une à une quand l'année s'affiche */
+.year-slide.is-active .chip-list li {
+  animation: chip-in 0.4s ease both;
+}
+
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.year-card__tag {
+  align-self: flex-start;
+  margin-top: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #0d6f65;
+  background: #e0f4f3;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip-list li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--color-purple);
+  background: #fff;
+  box-shadow: 0 2px 8px #24211a0d;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.year-card__extras {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px dashed var(--color-line);
+  list-style: none;
+}
+
+.year-card__extras li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.year-card__extras svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--color-mint);
+}
+
+/* Navigation */
+.year-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.year-arrow {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  color: var(--color-purple);
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.year-arrow:hover:not(:disabled) {
+  color: #fff;
+  background: var(--color-purple);
+  transform: scale(1.06);
+}
+
+.year-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.year-controls__count {
+  min-width: 140px;
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .year-slide {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .year-slide__big {
+    font-size: 48px;
+  }
+
+  .year-slide h3 {
+    font-size: 20px;
+  }
+}
+
+/* ===== Formation : cartes « Trois domaines » (clic = fenêtre des projets) ===== */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+  color: var(--color-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.skill-card:focus-visible {
+  outline: 3px solid var(--color-mint);
+  outline-offset: 3px;
+}
+
+.skill-card__media {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #1e1a5c;
+}
+
+.skill-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.skill-card:hover .skill-card__media img {
+  transform: scale(1.06);
+}
+
+.skill-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 24px 24px;
+}
+
+.skill-card__number {
+  color: var(--color-mint);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.skill-card__title {
+  margin: 8px 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.skill-card__text {
+  margin-bottom: 18px;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.skill-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--color-purple);
+  background: #eae9f5;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.skill-card__cta svg {
+  transition: transform 0.25s ease;
+}
+
+.skill-card:hover .skill-card__cta {
+  color: #fff;
+  background: var(--color-purple);
+}
+
+.skill-card:hover .skill-card__cta svg {
+  transform: translateX(4px);
+}
+
+/* Fenêtre des projets (balise <dialog>) */
+.project-dialog {
+  width: min(960px, calc(100% - 32px));
+  max-height: calc(100vh - 64px);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 24px;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 0 30px 80px #0e10454d;
+}
+
+.project-dialog::backdrop {
+  background: #1e1a5cb3;
+  backdrop-filter: blur(4px);
+}
+
+.project-dialog[open] {
+  animation: dialog-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.project-dialog[open]::backdrop {
+  animation: backdrop-in 0.35s ease;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.project-dialog__content {
+  padding: 32px;
+}
+
+.project-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.project-dialog__header h2 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+}
+
+.project-dialog__close {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  color: var(--color-purple);
+  background: #fff;
+  cursor: pointer;
+  transform: rotate(45deg);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.project-dialog__close:hover {
+  color: #fff;
+  background: var(--color-purple);
+}
+
+.project-list {
+  display: grid;
+  gap: 16px;
+}
+
+/* Un projet : aperçu à gauche, description et liens à droite */
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 18px;
+  background: #fff;
+  animation: project-in 0.45s ease both;
+}
+
+.project:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+@keyframes project-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.project__media {
+  min-height: 220px;
+  background: #1e1a5c;
+}
+
+.project__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project__placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  place-items: center;
+  color: #ffffffcc;
+  background:
+    radial-gradient(ellipse at 100% 0%, #00a19a66 0%, #00a19a00 55%),
+    linear-gradient(160deg, #2f2a85, #1e1a5c);
+}
+
+.project__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 26px;
+}
+
+.project__tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #1e1a5c;
+  background: #fbda26;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.project__body h3 {
+  margin: 12px 0 8px;
+  font-size: 20px;
+}
+
+.project__body p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+@media (max-width: 1000px) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-card__media {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+@media (max-width: 700px) {
+  .project-dialog__content {
+    padding: 20px;
+  }
+
+  .project-dialog__header h2 {
+    font-size: 21px;
+  }
+
+  .project {
+    grid-template-columns: 1fr;
+  }
+
+  .project__media,
+  .project__placeholder {
+    min-height: 160px;
+  }
+}
+
+/* ===== Bandeau bleu avec illustration et chiffres clés (PageIntro) ===== */
+.page-intro--illustrated .page-intro__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: center;
+  column-gap: 40px;
+}
+
+.page-intro__illustration .mascot {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+}
+
+.page-intro__extra {
+  grid-column: 1 / -1;
+}
+
+.intro-figures {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+  margin: 36px 0 0;
+  padding-top: 28px;
+  border-top: 1px solid #ffffff26;
+}
+
+/* Le nombre (dd) s'affiche au-dessus de son libellé (dt) */
+.intro-figure {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+
+.intro-figure dd {
+  margin: 0;
+  color: #4fd1c5;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.intro-figure dt {
+  color: #dedcf0;
+  font-size: 14px;
+}
+
+/* ===== Petits personnages (mascot.tsx) ===== */
+.mascot {
+  overflow: visible;
+}
+
+.mascot__float {
+  animation: mascot-float 4s ease-in-out infinite;
+}
+
+.mascot__float--b {
+  animation-delay: -1.3s;
+  animation-duration: 5s;
+}
+
+.mascot__float--c {
+  animation-delay: -2.6s;
+  animation-duration: 4.5s;
+}
+
+@keyframes mascot-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Le diplômé fait coucou */
+.mascot__wave {
+  transform-box: view-box;
+  transform-origin: 76px 140px;
+  animation: mascot-wave 2.4s ease-in-out infinite;
+}
+
+@keyframes mascot-wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(-14deg);
+  }
+  80% {
+    transform: rotate(8deg);
+  }
+  90% {
+    transform: rotate(-10deg);
+  }
+}
+
+.section-heading--mascot {
+  align-items: flex-end;
+}
+
+.section-mascot {
+  width: 130px;
+  flex: 0 0 auto;
+  margin-bottom: -12px;
+}
+
+/* ===== Formation : petits graphiques (formation-charts.tsx) ===== */
+.chart-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.2fr) minmax(0, 0.85fr);
+  gap: 16px;
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--color-line);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.chart-card figcaption {
+  display: grid;
+  gap: 4px;
+}
+
+.chart-card figcaption strong {
+  font-size: 18px;
+}
+
+.chart-card figcaption span {
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+/* Anneau */
+.donut {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.donut svg {
+  width: 160px;
+  flex: 0 0 auto;
+}
+
+.donut__slice {
+  cursor: pointer;
+  transition: stroke-width 0.2s ease, opacity 0.2s ease;
+}
+
+.donut__total {
+  fill: var(--color-ink);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.donut__caption {
+  fill: var(--color-muted);
+  font-size: 12px;
+}
+
+.chart-legend {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chart-legend li {
+  display: grid;
+  grid-template-columns: 12px 1fr;
+  column-gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.chart-legend__swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+}
+
+.chart-legend strong {
+  grid-column: 2;
+  color: var(--color-ink);
+  font-size: 15px;
+}
+
+/* Barres d'intervalle (semaines de stage) */
+.range-chart {
+  display: grid;
+  gap: 18px;
+  padding-right: 64px;
+}
+
+.range-chart__row {
+  display: grid;
+  gap: 8px;
+}
+
+.range-chart__label {
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.range-chart__track {
+  position: relative;
+  height: 22px;
+}
+
+.range-chart__grid {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 1px;
+  background: var(--color-line);
+}
+
+.range-chart__track {
+  cursor: pointer;
+}
+
+/* Durée minimale : turquoise plein, ancré à 0 */
+.range-chart__bar {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 16px;
+  border-radius: 4px 0 0 4px;
+  background: var(--color-mint);
+  transition: filter 0.2s ease;
+}
+
+/* Marge possible (ex. de 8 à 12 semaines) : même couleur, plus claire, séparée de 2 px */
+.range-chart__bar--range {
+  border-left: 2px solid #fff;
+  border-radius: 0 4px 4px 0;
+  background: #00a19a66;
+}
+
+.range-chart__track:hover .range-chart__bar {
+  filter: brightness(1.12);
+}
+
+/* Quand il n'y a pas de marge (durée fixe), la barre est arrondie des deux côtés */
+.range-chart__bar:only-of-type,
+.range-chart__bar:not(:has(+ .range-chart__bar--range)) {
+  border-radius: 4px;
+}
+
+.range-chart__value {
+  position: absolute;
+  top: 1px;
+  margin-left: 8px;
+  color: var(--color-ink);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.range-chart__axis {
+  position: relative;
+  height: 16px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.range-chart__axis span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+/* Jauge */
+.meter {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  text-align: center;
+}
+
+.meter svg {
+  width: 100%;
+  max-width: 200px;
+}
+
+.meter__value {
+  cursor: pointer;
+}
+
+.meter__number {
+  fill: var(--color-ink);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.meter p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.meter p strong {
+  color: var(--color-ink);
+}
+
+/* Infobulle commune */
+.chart-tip {
+  position: absolute;
+  z-index: 5;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--color-ink);
+  font-size: 13px;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+}
+
+@media (max-width: 1000px) {
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-figures {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .page-intro--illustrated .page-intro__content {
+    grid-template-columns: 1fr;
+  }
+
+  .page-intro__illustration {
+    display: none;
+  }
+
+  .section-mascot {
+    width: 90px;
+  }
+}
+
+@media (max-width: 600px) {
+  .intro-figures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .donut {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-mascot {
+    display: none;
+  }
+}
+
+/* Petit « ? » à côté d'un chiffre clé, avec son explication au survol / au toucher */
+.figure-hint {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.figure-hint__button {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #ffffff80;
+  border-radius: 50%;
+  color: #fff;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: help;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.figure-hint:hover .figure-hint__button,
+.figure-hint__button:focus-visible {
+  border-color: #4fd1c5;
+  color: #1e1a5c;
+  background: #4fd1c5;
+  outline: none;
+}
+
+.figure-hint__text {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  z-index: 5;
+  width: min(300px, 80vw);
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: var(--color-ink);
+  background: #fff;
+  box-shadow: 0 12px 30px #0e104540;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* petite flèche sous la bulle */
+.figure-hint__text::after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 7px solid transparent;
+  border-top-color: #fff;
+  content: "";
+  transform: translateX(-50%);
+}
+
+.figure-hint:hover .figure-hint__text,
+.figure-hint:focus-within .figure-hint__text {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }

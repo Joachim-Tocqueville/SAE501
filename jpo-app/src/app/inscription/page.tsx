@@ -1,10 +1,9 @@
 import { RegistrationForm } from "@/components/registration/registration-form";
-import { DemoNotice } from "@/components/ui/demo-notice";
 import { PageIntro } from "@/components/ui/page-intro";
 
 const visitInfo = [
-  ["Date", "Samedi 11 mars"],
-  ["Horaires", "De 9 h 30 à 16 h"],
+  ["Date", "Samedi 30 janvier 2027"],
+  ["Horaires", "De 9 h 30 à 17 h"],
   ["Lieu", "IUT de Meaux · 17 rue Jablinot"],
 ];
 
@@ -31,10 +30,7 @@ export default function RegistrationPage() {
           </div>
           <a className="registration-aside__link" href="/itineraire">Voir comment venir →</a>
         </aside>
-        <div>
-          <RegistrationForm />
-          <DemoNotice />
-        </div>
+        <RegistrationForm />
       </section>
     </>
   );
