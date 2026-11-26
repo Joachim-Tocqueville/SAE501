@@ -7,7 +7,7 @@ export function FormationFeature() {
       <LazyVideo
         className="feature-video"
         youtubeId="OU2niH-FJI4"
-        poster="/images/campus.jpg"
+        poster="/images/etudiants-groupe.jpg"
         title="Le BUT MMI en 2 minutes"
         caption="Le BUT MMI en 2 minutes"
       />

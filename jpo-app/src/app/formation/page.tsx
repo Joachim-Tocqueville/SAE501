@@ -318,50 +318,19 @@ export default function FormationPage() {
         <header className="section-heading">
           <div>
             <span className="eyebrow">En images</span>
-            <h2>Le campus en images</h2>
+            <h2>La vie au département</h2>
           </div>
         </header>
         <div className="gallery">
-          {gallery.map((item) =>
-            item.kind === "sphere" ? (
-              <figure className={`gallery-item gallery-item--sphere${item.wide ? " gallery-item--wide" : ""}`} key={item.src}>
-                <iframe
-                  src={item.src}
-                  title={`Vue 360° : ${item.caption}`}
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-                <figcaption>
-                  <span className="gallery-sphere__badge">360°</span>
-                  <strong>{item.caption}</strong>
-                </figcaption>
-              </figure>
-            ) : item.kind === "photo" ? (
-              <figure className={`gallery-item${item.wide ? " gallery-item--wide" : ""}`} key={item.src}>
-                <img src={item.src} alt={item.caption} loading="lazy" />
-                <figcaption>
-                  <strong>{item.caption}</strong>
-                  <span>{item.detail}</span>
-                  {item.credit && <small>{item.credit}</small>}
-                </figcaption>
-              </figure>
-            ) : (
-              <div className={`gallery-item gallery-tile gallery-tile--${item.tone}`} key={item.title}>
-                <span className="gallery-tile__icon">
-                  <Icon name={item.icon} size={22} />
-                </span>
-                <strong>{item.title}</strong>
-                <p>{item.text}</p>
-                {item.href && (
-                  <Link className="gallery-tile__link" href={item.href}>
-                    {item.cta}
-                    <Icon name="arrow" size={14} />
-                  </Link>
-                )}
-              </div>
-            ),
-          )}
+          {gallery.map((photo) => (
+            <figure className="gallery-item" key={photo.src}>
+              <img src={photo.src} alt={photo.caption} loading="lazy" />
+              <figcaption>
+                <strong>{photo.caption}</strong>
+                <span>{photo.detail}</span>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </section>
       <section className="container page-section page-section--last">
